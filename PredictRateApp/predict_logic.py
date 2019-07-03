@@ -69,7 +69,9 @@ class CurrencyPrediction(generics.CreateAPIView):
     """
     def get(self, request):
         # self.delete_cache()
-        return Response(data={"cached_data": self.get_cache()})
+
+        # return Response(data={"cached_data": self.get_cache()})
+        return render(request,'show_result.html')
 
     """
     Deletes the cache by invoking the delete function of the django cache library through fixed key

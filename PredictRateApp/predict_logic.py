@@ -69,7 +69,7 @@ class CurrencyPrediction(generics.CreateAPIView):
     """
     def get(self, request):
         # self.delete_cache()
-
+        print("image is here")
         # return Response(data={"cached_data": self.get_cache()})
         return render(request,'show_result.html')
 
@@ -101,7 +101,7 @@ class CurrencyPrediction(generics.CreateAPIView):
 
     def stock_exchange_api(self):
 
-        before_2_months = self.__todays_date - timedelta(days=12)
+        before_2_months = self.__todays_date - timedelta(days=60)
         raw_url = "https://api.exchangeratesapi.io/history?start_at="+str(before_2_months)+"&end_at="+str(
             self.__todays_date)+"&base="+self.__base_currency+"&symbols="+self.__target_currency
         self.__raw_json_data = self.url_request(raw_url)
@@ -210,6 +210,7 @@ class CurrencyPrediction(generics.CreateAPIView):
 
         self.chart_creation(start_date, max_waiting_time)
         url = reverse('show_result')
+        print("first")
         return Response(data={"url":url,"cache":self.get_cache()},status=status.HTTP_200_OK)
 
 class DeleteCache(generics.CreateAPIView):

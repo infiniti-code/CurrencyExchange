@@ -210,7 +210,7 @@ class CurrencyPrediction(generics.CreateAPIView):
 
         self.chart_creation(start_date, max_waiting_time)
         url = reverse('show_result')
-        return Response(data={"url":url},status=status.HTTP_200_OK)
+        return Response(data={"url":url,"cache":self.get_cache()},status=status.HTTP_200_OK)
 
 class DeleteCache(generics.CreateAPIView):
 

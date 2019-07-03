@@ -72,7 +72,7 @@ class CurrencyPrediction(generics.CreateAPIView):
         # self.delete_cache()
         print("image is here")
         img_data = open(BASE_DIR+"/forecasted_graphs/buf.png","rb").read()
-        return HttpResponse(img_data,mimetype="image/png")
+        return HttpResponse(img_data,content_type="image/png")
         # return Response(data={"cached_data": self.get_cache()})
         # return render_to_response('PredictRateApp/show_result.html')
 

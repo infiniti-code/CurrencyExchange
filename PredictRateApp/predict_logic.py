@@ -17,7 +17,7 @@ from matplotlib.figure import Figure
 from rest_framework import generics, status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-
+from django.urls import reverse
 from CurrencyExchange.settings import BASE_DIR
 
 
@@ -209,8 +209,8 @@ class CurrencyPrediction(generics.CreateAPIView):
             return Response(data={"Value error": "Start Date should be a future date, Amount/Max Waiting Time should not be negative and should be an Integer"}, status=status.HTTP_400_BAD_REQUEST)
 
         self.chart_creation(start_date, max_waiting_time)
-
-        return Response(status=status.HTTP_200_OK)
+        url = reverse('show_result')
+        return Response(data={"url":url},status=status.HTTP_200_OK)
 
 class DeleteCache(generics.CreateAPIView):
 

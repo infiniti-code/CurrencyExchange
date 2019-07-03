@@ -20,6 +20,7 @@ from rest_framework.response import Response
 from django.urls import reverse
 from CurrencyExchange.settings import BASE_DIR
 from django.shortcuts import render_to_response
+from django.http import HttpResponse
 
 # def delete_cache(request):
 #     cache_key = request.POST.get("cache_key","")
@@ -70,8 +71,10 @@ class CurrencyPrediction(generics.CreateAPIView):
     def get(self, request):
         # self.delete_cache()
         print("image is here")
+        img_data = open(BASE_DIR+"/forecasted_graphs/buf.png","rb").read()
+        return HttpResponse(img_data,mimetype="image/png")
         # return Response(data={"cached_data": self.get_cache()})
-        return render_to_response('PredictRateApp/show_result.html')
+        # return render_to_response('PredictRateApp/show_result.html')
 
     """
     Deletes the cache by invoking the delete function of the django cache library through fixed key

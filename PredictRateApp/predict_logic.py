@@ -212,9 +212,12 @@ class CurrencyPrediction(generics.CreateAPIView):
             return Response(data={"Value error": "Start Date should be a future date, Amount/Max Waiting Time should not be negative and should be an Integer"}, status=status.HTTP_400_BAD_REQUEST)
 
         self.chart_creation(start_date, max_waiting_time)
-        url = reverse('show_result')
-        print("first")
-        return Response(data={"url":url,"cache":self.get_cache()},status=status.HTTP_200_OK)
+        # url = reverse('show_result')
+        # print("first")
+        img_data = open(BASE_DIR+"/forecasted_graphs/buf.png","rb").read()
+        return HttpResponse(img_data,content_type="image/png")
+        # return HttpResponse()
+        # return Response(data={"url":url,"cache":self.get_cache()},status=status.HTTP_200_OK)
 
 class DeleteCache(generics.CreateAPIView):
 

@@ -199,12 +199,13 @@ class CurrencyPrediction(generics.CreateAPIView):
     Thus, creating a forecast for the exchange rates.
     """
     def post(self, request):
+        print("here 1")
         self.__base_currency = request.data.get("base_currency", "")
         self.__target_currency = request.data.get("target_currency", "")
         amount = request.data.get("amount", "")
         max_waiting_time = request.data.get("max_waiting_time", "")
         start_date = request.data.get("start_date", "")
-
+        print("here 2")
         self.__cached_data = self.get_cache()
         self.cache_check()
         start_date = datetime.strptime(start_date, "%Y-%m-%d").date()
@@ -214,6 +215,7 @@ class CurrencyPrediction(generics.CreateAPIView):
         self.chart_creation(start_date, max_waiting_time)
         # url = reverse('show_result')
         # print("first")
+        print("here 3")
         img_data = open(BASE_DIR+"/forecasted_graphs/buf.png","rb").read()
         return HttpResponse(img_data,content_type="image/png")
         # return HttpResponse()
